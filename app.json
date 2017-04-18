@@ -1,0 +1,7 @@
+{
+    "name": "Prueba Kunder",
+    "description": "Parte de la prueba para kunder",
+    "repository": "https://github.com/Gaboxgg/pruebaKunder.git",
+    "logo": "http://pathToYourLogo.png",
+    "keywords": ["ionic", "prueba"]
+}
