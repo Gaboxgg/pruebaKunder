@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>Comic: {{detalle.title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="fondo">
+  <ion-list>
+    <ion-card>
+      <img src={{detalle.thumbnail.path}}.{{detalle.thumbnail.extension}} />
+      <ion-card-content style="margin-left:15px">
+      
+        <ion-card-title text-wrap color='title'>
+          {{detalle.title}} - {{detalle.dates[0].date | date:'dd/MM/yyyy'}}
+        </ion-card-title>
+      <table bordercolor="red" border="1px">
+        <tr>
+        <td>  
+        <p text-wrap primary>
+          <b style="color:#0072bc"> Serie </b> 
+        </p>
+        </td>
+        <td align="center">
+          {{detalle.series.name}}
+        </td>
+        </tr>
+        <tr>
+        <td> 
+        <p text-wrap primary>
+          <b style="color:#0072bc"> Precio del comic </b>
+        </p>
+        </td>
+        <td align="center">
+          $ {{detalle.prices[0].price}}
+        </td>
+        </tr>
+        <tr>
+        <td>
+        <p text-wrap primary>
+        <b style="color:#0072bc"> Precio del comic digital </b> 
+        </p>
+        </td>
+        <td align="center">
+          $ {{precio_digital}}
+        </td>
+        </tr>
+        <tr>
+        <td>
+        <p text-wrap>
+          <b style="color:#0072bc"> Numero de páginas </b> 
+        </p>
+        </td>
+        <td align="center">
+          {{detalle.pageCount}}
+        </td>
+        </tr>
+        </table>
+        <p text-wrap>
+          <b >Personajes:</b>
+          <b *ngIf="detalle.characters.items?.length == 0">No hay información de sus personajes.</b>
+        </p>
+        <ul *ngFor="let character of detalle.characters.items">
+          <li>
+            {{character.name}}
+          </li>
+        </ul>
+        <br>
+        <p text-wrap>
+          {{detalle.description}}
+        </p>
+        <br>
+        <a href="https://read.marvel.com/#/book/{{detalle.digitalId}}" target="_blank">Ver online</a>
+        <br>
+        <a href={{detalle.urls[0].url}} target="_blank">Ver en página web</a>
+      
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

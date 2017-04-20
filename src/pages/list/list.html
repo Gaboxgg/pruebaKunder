@@ -1,22 +1,51 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="danger">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>List</ion-title>
+    <ion-title text-center>Lista de Comics</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-left></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-right>
-        {{item.note}}
-      </div>
-    </button>
+  <h5 align="center" style="color:white">Busqueda</h5>
+  <ion-searchbar
+    [(ngModel)]="parametro_uno"
+    [showCancelButton]="shouldShowCancel"
+    (ionBlur)="cargarComics($event)"
+    placeholder="Título">
+  </ion-searchbar>
+
+  <ion-card>
+    <div class="item row">
+      <ion-card class="col col-25">
+        <ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]="fecha" placeholder="Desde" doneText="Aceptar" cancelText="Cancelar" color="danger" style="text-color:white"></ion-datetime>
+      </ion-card>
+      <ion-card class="col col-25">
+        <ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]="fecha2" placeholder="Hasta" doneText="Aceptar" cancelText="Cancelar" color="danger" style="text-color:white"></ion-datetime>
+      </ion-card>
+      <button style="width:auto;height:auto;" ion-button (click)="buscarComics($event)" color="danger">Buscar</button>
+    </div>
+    <h5 align="center" style="color:#0072bc">{{error_fecha}}</h5>
+</ion-card>
+
+  <ion-list color="blue">
+      <h5 align="center" *ngIf="comics?.length == 0" style="color:red">No se encontrar&oacute;n comics</h5>
+      <button ion-item *ngFor="let comic of comics" (click)="itemTapped($event, comic)">
+        <ion-card>
+          <img src={{comic.thumbnail.path}}.{{comic.thumbnail.extension}} />
+          <ion-card-content>
+            <ion-card-title text-wrap color='title'>
+              {{comic.title}} - {{comic.dates[0].date | date:'dd/MM/yyyy'}}
+            </ion-card-title>
+            <p text-wrap primary>
+              {{comic.description}}
+            </p>
+          </ion-card-content>
+        </ion-card>
+      </button>
   </ion-list>
+  
   <div *ngIf="selectedItem" padding>
     You navigated here from <b>{{selectedItem.title}}</b>
   </div>
