@@ -19,7 +19,7 @@ export class detalle {
     this.precio_digital=aux.prices[1].price;  
     }
     this.detalle = aux;
-    console.log(this.detalle);
+    //console.log(this.detalle);
    
 
   }
